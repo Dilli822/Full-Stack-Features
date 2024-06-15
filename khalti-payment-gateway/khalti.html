@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khalti Payment</title>
+</head>
+<body>
+    <h1>Khalti Payment Integration</h1>
+    <p>Click the button below to initiate the payment:</p>
+    <button onclick="initiatePayment()">Initiate Payment</button>
+
+    <script>
+        function initiatePayment() {
+            // Use XMLHttpRequest or fetch API to call the Python script
+            fetch('http://localhost:8000/initiate_payment')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to initiate payment');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log(data);
+                    alert('Payment initiated successfully. Redirecting to payment page.');
+                })
+                .catch(error => {
+                    console.error('Error initiating payment:', error);
+                    alert('Failed to initiate payment');
+                });
+        }
+    </script>
+</body>
+</html>
