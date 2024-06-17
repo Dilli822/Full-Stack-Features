@@ -11,7 +11,8 @@
 </head>
 
 <body>
-  <h1 class="text-center mb-4 position-fixed bg-light" style="z-index: 9; width: 100%;">Community | Live Online Chat System</h1>
+  <h1 class="text-center mb-4 position-fixed bg-light" style="z-index: 9; width: 100%;">Community | Live Online Chat
+    System</h1>
   <div class="container-fluid">
     <br>
     <div class="row justify-content-center mt-5">
@@ -85,8 +86,8 @@
       li.classList.add('message', 'my-1', 'p-1', 'rounded');
       li.innerHTML = `
       <div>
-        <span class="username font-weight-bold">${msg.username}:</span>
-        <span>${msg.message}</span> <br>
+        <span class="username font-weight-bold"> <b>  ${msg.username} </b>:</span>
+        <span class="text-xl-start">   ${msg.message}</span> <br>
           <span class="meta text-muted small">${msg.timestamp} or ${formatDate(new Date())}</span>
       <hr/>
     `;
@@ -110,21 +111,21 @@
   </script>
   <script>
     const chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-    console.log(chatMessages)  
-const formattedMessages = chatMessages.map(message => ({
-  username: message.username,
-  original_chat_datetimestamp: message.timestamp, // Assuming "timestamp" field holds the combined date and time
-  message: message.message
-}));
+    console.log(chatMessages)
+    const formattedMessages = chatMessages.map(message => ({
+      username: message.username,
+      original_chat_datetimestamp: message.timestamp, // Assuming "timestamp" field holds the combined date and time
+      message: message.message
+    }));
 
 
-const latestMessage = formattedMessages[formattedMessages.length - 1];
+    const latestMessage = formattedMessages[formattedMessages.length - 1];
 
-console.log(latestMessage);
+    console.log(latestMessage);
 
 
-   // Function to send messages to Django backend API
-   const sendMessagesToAPI = async () => {
+    // Function to send messages to Django backend API
+    const sendMessagesToAPI = async () => {
 
       if (chatMessages.length > 0) {
         try {
@@ -144,13 +145,13 @@ console.log(latestMessage);
           }
         } catch (error) {
           console.error('Error sending messages to API:', error);
-        
-      }
-    };
-  }
+
+        }
+      };
+    }
 
     // Set interval to send messages to API every 2 minutes (120,000 milliseconds)
-    setInterval(sendMessagesToAPI, 25000 );
+    setInterval(sendMessagesToAPI, 25000);
 
 
   </script>
